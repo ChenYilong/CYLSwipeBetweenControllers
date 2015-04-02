@@ -29,12 +29,10 @@
  */
 - (void)addNavSwitch
 {
-    CYLNavSwitch *navSwitch = [CYLNavSwitch navSwitchWithNameArray:self.switchTitleArray];
+    CYLNavSwitch *navSwitch = [[CYLNavSwitch alloc] initWithNameArray:self.switchTitleArray andNotificationPrefix:nil delegate:self];
     navSwitch.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44);
     [self.view addSubview:navSwitch];
     [self.view bringSubviewToFront:navSwitch];
-    // 设置代理
-    navSwitch.delegate = self;
 }
 
 - (void)setupScrollView {
@@ -82,8 +80,13 @@
 {
     // 发通知
     NSString *str = [NSString stringWithFormat:@"%f",scrollView.contentOffset.x];
-    NSDictionary *usInfo = [NSDictionary dictionaryWithObject:str forKey:@"ScrollVwContextOffsetX"];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"ScrollViewDidEndDraggingNotification" object:nil userInfo:usInfo];
+    NSString *notificationPrefix = NSStringFromClass([self class]);
+//    NSLog(@"‼️‼️‼️‼️‼️notificationPrefix%@",notificationPrefix);
+    NSString *contentOffsetUsinfoStr = [NSString stringWithFormat:@"%@ScrollVwContextOffsetX",notificationPrefix];
+    NSDictionary *usInfo = [NSDictionary dictionaryWithObjects:@[str, notificationPrefix] forKeys:@[contentOffsetUsinfoStr, @"notificationPrefix"]];
+    NSString *notificationName = [NSString stringWithFormat:@"%@ScrollViewDidEndDraggingNotification", notificationPrefix];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:usInfo];
 }
 
 #pragma NavSwitchDelegate方法

@@ -26,6 +26,7 @@
 @interface CYLNavSwitch : UIView
 
 + (instancetype)navSwitchWithNameArray:(NSArray *)nameArray;
+- (instancetype)initWithNameArray:(NSArray *)nameArray andNotificationPrefix:(NSString *)notificationPrefix delegate:(id<NavSwitchDelegate>)delegate;
 
 @property (nonatomic, weak) id<NavSwitchDelegate> delegate;
 @property (nonatomic, strong) UIColor *underLineColor;

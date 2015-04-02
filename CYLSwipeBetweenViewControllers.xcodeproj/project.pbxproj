@@ -32,7 +32,6 @@
 		9A5E02241ACC1C65009D7DA0 /* NSDictionary+log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+log.m"; sourceTree = "<group>"; };
 		9A5E02251ACC1C65009D7DA0 /* NSString+General.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+General.h"; sourceTree = "<group>"; };
 		9A5E02261ACC1C65009D7DA0 /* NSString+General.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+General.m"; sourceTree = "<group>"; };
-		9A5E02271ACC1C65009D7DA0 /* UILabel+Size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Size.h"; sourceTree = "<group>"; };
 		9A5E02281ACC1C65009D7DA0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		9A5E02291ACC1C65009D7DA0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9A5E022A1ACC1C65009D7DA0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -113,7 +112,6 @@
 				9A5E02241ACC1C65009D7DA0 /* NSDictionary+log.m */,
 				9A5E02251ACC1C65009D7DA0 /* NSString+General.h */,
 				9A5E02261ACC1C65009D7DA0 /* NSString+General.m */,
-				9A5E02271ACC1C65009D7DA0 /* UILabel+Size.h */,
 			);
 			path = Category;
 			sourceTree = "<group>";
