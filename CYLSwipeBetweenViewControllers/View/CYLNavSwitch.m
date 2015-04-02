@@ -67,44 +67,29 @@
     return _nameArr;
 }
 
-+ (instancetype)navSwitchWithNameArray:(NSArray *)nameArray
-{
-//    nameArr = nameArray;
-    return [[self alloc] init];
-}
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         [self sharedInit];
-//        self.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44);
         self.backgroundColor = self.switchViewbgColor;
-
         // 创建并设置按钮
         for (NSUInteger i = 0; i < self.nameArr.count; i++) {
             [self btnWithName:self.nameArr[i] number:i];
         }
-
+        
         // 创建滑动条
         UIView *underLineView = [[UIView alloc] init];
         [self addSubview:underLineView];
         underLineView.backgroundColor = self.underLineColor;
         self.underLineView = underLineView;
-
+        
         // 监听BellsLibraryViewController中主scrollView滚动结束的通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeBtnState:) name:@"ScrollViewDidEndDraggingNotification" object:nil];
     }
     return self;
 }
-/**
- *  初始化创建CYLNavSwitch对象
- *
- *  @param nameArray           switch 的标题，是字符串数组
- *  @param notificationPrefix 通知名称，如果为 nil，默认是当前类名，如果想更改，直接传入任意字符串
- *
- *  @return 初始化过的CYLNavSwitch对象
- */
+
 - (instancetype)initWithNameArray:(NSArray *)nameArray andNotificationPrefix:(NSString *)notificationPrefix delegate:(id<NavSwitchDelegate>)delegate
 {
     self = [super init];
@@ -135,6 +120,11 @@
         }
     }
     return self;
+}
+
++ (instancetype)navSwitchWithNameArray:(NSArray *)nameArray andNotificationPrefix:(NSString *)notificationPrefix delegate:(id<NavSwitchDelegate>)delegate
+{
+    return [[self alloc] initWithNameArray:nameArray andNotificationPrefix:notificationPrefix delegate:delegate];
 }
 /**
  *  添加监听
@@ -271,6 +261,16 @@
     
     // 布局子控件UIView
     self.underLineView.frame = CGRectMake(0, self.frame.size.height -kUnderLineViewHeight, [UIScreen mainScreen].bounds.size.width/self.nameArr.count, kUnderLineViewHeight);
+}
+
++(void)postNotificationWithScrollView:(UIScrollView *)scrollView delegate:(id<NavSwitchDelegate>)delegate {
+    // 发通知
+    NSString *str = [NSString stringWithFormat:@"%f",scrollView.contentOffset.x];
+    NSString *notificationPrefix = NSStringFromClass([delegate class]);
+    NSString *contentOffsetUsinfoStr = [NSString stringWithFormat:@"%@ScrollVwContextOffsetX",notificationPrefix];
+    NSDictionary *usInfo = [NSDictionary dictionaryWithObjects:@[str, notificationPrefix] forKeys:@[contentOffsetUsinfoStr, @"notificationPrefix"]];
+    NSString *notificationName = [NSString stringWithFormat:@"%@ScrollViewDidEndDraggingNotification", notificationPrefix];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:usInfo];
 }
 
 @end
